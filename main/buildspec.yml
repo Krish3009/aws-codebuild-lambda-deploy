@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Build started"
+      # No build commands necessary for Python
+
+  post_build:
+    commands:
+      - echo "Packaging Lambda function"
+      - zip -r lambda_function.zip HelloWorld.py   # Package your Python code
+      - echo "Deploying to Lambda"
+      - aws lambda update-function-code --function-name HelloWorld --zip-file fileb://lambda_function.zip
